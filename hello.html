@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Abhipsa!</title>
+  <style>
+    body {
+      background: linear-gradient(45deg, #f9c5d1, #fdeff9);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #d63384;
+      margin-bottom: 20px;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ff69b4;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .btn:hover {
+      background: #ff1493;
+    }
+
+    .surprise, .password-area, .secret, .birthday-content {
+      display: none;
+    }
+
+    .surprise {
+      font-size: 1.3rem;
+      margin-top: 20px;
+      color: #6f42c1;
+    }
+
+    .password-area {
+      margin-top: 50px;
+    }
+
+    input[type="password"] {
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .secret {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      color: #dc3545;
+      background: #fff0f3;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    #countdownArea {
+      font-size: 2rem;
+      color: #6c757d;
+      margin-top: 150px;
+    }
+
+    #timer {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ff1493;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Countdown Area -->
+  <div id="countdownArea">
+    ⏳ Waiting for 25 June, Midnight Surprise... <br>
+    <div id="timer">Loading...</div>
+  </div>
+
+  <!-- Birthday Content -->
+  <div class="birthday-content" id="mainContent">
+    <h1>🎂 Happy Birthday Abhipsa! 🎉</h1>
+
+    <img src="WhatsApp Image 2025-06-24 at 22.04.19_8dd23e53.jpg" alt="Abhipsa's Photo" />
+
+    <p style="font-size: 1.2rem; color: #333; margin-top: 20px;">
+      Wishing you lots of smiles, success, and sweetness! 🌸
+    </p>
+
+    <!-- Surprise Buttons -->
+    <button class="btn" onclick="showSurprise(1)">Surprise 1</button>
+    <button class="btn" onclick="showSurprise(2)">Surprise 2</button>
+    <button class="btn" onclick="showSurprise(3)">Surprise 3</button>
+
+    <!-- Surprise Messages -->
+    <div class="surprise" id="msg1">🎈 Stay happy and blessed always!</div>
+    <div class="surprise" id="msg2">🌟 You bring joy wherever you go!</div>
+    <div class="surprise" id="msg3">💐 A day full of sunshine and smiles to you!</div>
+
+    <!-- Password Area -->
+    <div class="password-area">
+      <h3>🔒 Enter Password to Unlock Our Love Message</h3>
+      <input type="password" id="secretPass" placeholder="Enter Password" />
+      <button class="btn" onclick="checkPassword()">Unlock</button>
+      <div class="error" id="errorMsg"></div>
+    </div>
+
+    <!-- Secret Message -->
+    <div class="secret" id="secretMessage">
+      💌 Dear Abhipsa,<br><br>
+      From the very first moment I saw you, I knew you were special. <br>
+      Your presence lights up my world, and I wish to make every birthday of yours more magical than the last. <br><br>
+      🎁 You're not just special today — you're special every single day.<br><br>
+      ❤️ Yours truly,  
+      <br>– Sanat
+    </div>
+
+    <!-- Music -->
+    <audio id="bgMusic" autoplay loop>
+      <source src="Vaseegara - Flute _ Bgm.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <script>
+    const targetDate = new Date("June 25, 2025 00:00:00").getTime(); // 🎯 25 June Midnight
+
+    function updateTimer() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdownArea").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        document.querySelector(".password-area").style.display = "block";
+        document.getElementById("bgMusic").play();
+        return;
+      }
+
+      const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+
+      document.getElementById("timer").innerText = `${hours} : ${minutes} : ${seconds}`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    function showSurprise(n) {
+      document.getElementById("msg1").style.display = "none";
+      document.getElementById("msg2").style.display = "none";
+      document.getElementById("msg3").style.display = "none";
+      document.getElementById("msg" + n).style.display = "block";
+    }
+
+    function checkPassword() {
+      const correctPassword = "2506";
+      const userInput = document.getElementById("secretPass").value;
+      const secret = document.getElementById("secretMessage");
+      const error = document.getElementById("errorMsg");
+
+      if (userInput === correctPassword) {
+        secret.style.display = "block";
+        error.textContent = "";
+      } else {
+        secret.style.display = "none";
+        error.textContent = "❌ Incorrect Password!";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
